@@ -790,19 +790,19 @@ sectionIcon.Size = UDim2.new(0, 13, 0, 13)
 sectionIcon.ZIndex = 1
 sectionIcon.Parent = section
 
-local function sectionAnimation()
-    TweenService:Create(section, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Size = Info.Closed and UDim2.new(0, 162, 0, SizeY + 4) or UDim2.new(0, 162, 0, 27)}):Play()
-    TweenService:Create(sectionFrame, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Size = Info.Closed and UDim2.new(0, 162, 0, SizeY) or UDim2.new(0, 162, 0, 23)}):Play()
-    TweenService:Create(sectionIcon, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Info.Closed and Color3.fromRGB(217, 97, 99) or Color3.fromRGB(217, 217, 217)}):Play()
-    TweenService:Create(sectionIcon, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Rotation = Info.Closed and 45 or 0}):Play()
+local function sectionAnimation(closed)
+    TweenService:Create(section, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Size = closed and UDim2.new(0, 162, 0, SizeY + 4) or UDim2.new(0, 162, 0, 27)}):Play()
+    TweenService:Create(sectionFrame, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Size = closed and UDim2.new(0, 162, 0, SizeY) or UDim2.new(0, 162, 0, 23)}):Play()
+    TweenService:Create(sectionIcon, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = closed and Color3.fromRGB(217, 97, 99) or Color3.fromRGB(217, 217, 217)}):Play()
+    TweenService:Create(sectionIcon, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Rotation = closed and 45 or 0}):Play()
 end
 
 sectionButton.MouseButton1Click:Connect(function()
     Info.Closed = not Info.Closed
-    sectionAnimation()
+    sectionAnimation(Info.Closed)
 end)
 
-sectionAnimation()
+sectionAnimation(Info.Closed)
 
 function sectiontable:Label(Info)
 Info.Text = Info.Text or "Label"
