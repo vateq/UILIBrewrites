@@ -694,6 +694,7 @@ uICorner8.Parent = rightContainer
 
 function tab:Section(Info)
 Info.Text = Info.Text or "Section"
+Info.Enabled = Info.Enabled or nil
 Info.Side = Info.Side or "Left"
 
 local SizeY = 23
@@ -716,7 +717,7 @@ section.Size = UDim2.new(0, 162, 0, 27)
 section.Parent = Side
 
 local Closed = Instance.new("BoolValue", section)
-Closed.Value = false
+Closed.Value = not Info.Enabled
 
 local sectionFrame = Instance.new("Frame")
 sectionFrame.Name = "SectionFrame"
