@@ -1001,7 +1001,7 @@ end
 
 function sectiontable:Input(Info)
 Info.Placeholder = Info.Placeholder or "Input"
-Info.ClearText = Info.ClearText or true
+Info.ClearOnFocus = Info.ClearOnFocus or nil
 Info.Flag = Info.Flag or nil
 Info.Callback = Info.Callback or function() end
 Info.Tooltip = Info.Tooltip or ""
@@ -1051,7 +1051,7 @@ inputTextBox.Font = Enum.Font.GothamBold
 inputTextBox.PlaceholderColor3 = Color3.fromRGB(217, 217, 217)
 inputTextBox.PlaceholderText = Info.Placeholder
 inputTextBox.Text = ""
-inputTextBox.ClearTextOnFocus = Info.ClearText
+inputTextBox.ClearTextOnFocus = Info.ClearOnFocus
 inputTextBox.TextColor3 = Color3.fromRGB(237, 237, 237)
 inputTextBox.TextSize = 11
 inputTextBox.TextXAlignment = Enum.TextXAlignment.Left
