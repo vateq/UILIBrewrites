@@ -349,151 +349,157 @@ textLabel.Size = UDim2.new(0, 51, 0, 30)
 textLabel.ZIndex = 2
 textLabel.Parent = topbar
 
-local closeButton = Instance.new("ImageButton")
-closeButton.Name = "CloseButton"
-closeButton.Image = getcustomasset("Shaman/Close.png")
-closeButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
-closeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-closeButton.BackgroundTransparency = 1
-closeButton.Position = UDim2.new(0.947, 0, 0.194, 0)
-closeButton.Size = UDim2.new(0, 17, 0, 17)
-closeButton.ZIndex = 2
-closeButton.Parent = topbar
+if Info.CloseButton then
+    local closeButton = Instance.new("ImageButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Image = getcustomasset("Shaman/Close.png")
+    closeButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.BackgroundTransparency = 1
+    closeButton.Position = UDim2.new(0.947, 0, 0.194, 0)
+    closeButton.Size = UDim2.new(0, 17, 0, 17)
+    closeButton.ZIndex = 2
+    closeButton.Parent = topbar
 
-closeButton.MouseButton1Click:Once(function()
-    shamanScreenGui:Destroy()
-    tooltipScreenGui:Destroy()
-end)
+    closeButton.MouseButton1Click:Once(function()
+        shamanScreenGui:Destroy()
+        tooltipScreenGui:Destroy()
+    end)
 
-closeButton.MouseEnter:Connect(function()
-    TweenService:Create(closeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(217, 97, 99)}):Play()
-end)
+    closeButton.MouseEnter:Connect(function()
+        TweenService:Create(closeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(217, 97, 99)}):Play()
+    end)
 
-closeButton.MouseLeave:Connect(function()
-    TweenService:Create(closeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(217, 217, 217)}):Play()
-end)
+    closeButton.MouseLeave:Connect(function()
+        TweenService:Create(closeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(217, 217, 217)}):Play()
+    end)
+end
 
-local minimizeButton = Instance.new("ImageButton")
-minimizeButton.Name = "MinimizeButton"
-minimizeButton.Image = "rbxassetid://10664064072"
-minimizeButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
-minimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-minimizeButton.BackgroundTransparency = 1
-minimizeButton.Position = UDim2.new(0.893, 0, 0.194, 0)
-minimizeButton.Size = UDim2.new(0, 17, 0, 17)
-minimizeButton.ZIndex = 2
-minimizeButton.Parent = topbar
+if Info.MinimizeButton then
+    local minimizeButton = Instance.new("ImageButton")
+    minimizeButton.Name = "MinimizeButton"
+    minimizeButton.Image = "rbxassetid://10664064072"
+    minimizeButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
+    minimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    minimizeButton.BackgroundTransparency = 1
+    minimizeButton.Position = UDim2.new(0.893, 0, 0.194, 0)
+    minimizeButton.Size = UDim2.new(0, 17, 0, 17)
+    minimizeButton.ZIndex = 2
+    minimizeButton.Parent = topbar
 
-minimizeButton.MouseEnter:Connect(function()
-    TweenService:Create(minimizeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(194, 162, 76)}):Play()
-end)
+    minimizeButton.MouseEnter:Connect(function()
+        TweenService:Create(minimizeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(194, 162, 76)}):Play()
+    end)
 
-minimizeButton.MouseLeave:Connect(function()
-    TweenService:Create(minimizeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(217, 217, 217)}):Play()
-end)
+    minimizeButton.MouseLeave:Connect(function()
+        TweenService:Create(minimizeButton, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(217, 217, 217)}):Play()
+    end)
 
-local Opened = true
+    local Opened = true
 
-minimizeButton.MouseButton1Click:Connect(function()
-    Opened = not Opened
-    
-    topbar.Frame.Visible = Opened
-    task.spawn(function()
-    if Opened then
-        wait(.15)
-    end
-    for _,v in pairs(main:GetChildren()) do
-        if v.Name == "TabContainer" then
-            v.Visible = Opened
+    minimizeButton.MouseButton1Click:Connect(function()
+        Opened = not Opened
+        
+        topbar.Frame.Visible = Opened
+        task.spawn(function()
+        if Opened then
+            wait(.15)
         end
+        for _,v in pairs(main:GetChildren()) do
+            if v.Name == "TabContainer" then
+                v.Visible = Opened
+            end
+        end
+        for _,v in pairs(main:GetChildren()) do
+        if v.Name == "LeftContainer" or v.Name == "RightContainer" and v.Visible then
+            v.Size = Opened and UDim2.new(0, 168,0, 287) or UDim2.new(0, 168,0, 0)
+        end
+        end
+        end)
+        
+        TweenService:Create(main, TweenInfo.new(.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Size = Opened and UDim2.new(0, 450,0, 321) or UDim2.new(0, 450,0, 30)}):Play()
+    end)
+end
+
+if Info.RainbowButton then
+    local editButton = Instance.new("ImageButton")
+    editButton.Name = "EditButton"
+    editButton.Image = getcustomasset("Shaman/ColorDropper.png")
+    editButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
+    editButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    editButton.BackgroundTransparency = 1
+    editButton.Position = UDim2.new(0.841, 0, 0.226, 0)
+    editButton.Size = UDim2.new(0, 15, 0, 15)
+    editButton.ZIndex = 2
+    editButton.Parent = topbar
+
+    local uiGradient = Instance.new("UIGradient")
+    uiGradient.Name = "UIGradient"
+    uiGradient.Enabled = false
+    uiGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0,Color3.fromRGB(255,0,0)),
+        ColorSequenceKeypoint.new(0.2,Color3.fromRGB(255,255,0)),
+        ColorSequenceKeypoint.new(0.4,Color3.fromRGB(0,255,0)),
+        ColorSequenceKeypoint.new(0.6,Color3.fromRGB(0,255,255)),
+        ColorSequenceKeypoint.new(0.8,Color3.fromRGB(0,0,255)),
+        ColorSequenceKeypoint.new(1,Color3.fromRGB(255,0,255)),
+    }
+    uiGradient.Parent = editButton
+
+    task.spawn(function()
+        while wait() do -- skidded from devforum
+        if uiGradient.Enabled then
+        local loop = tick() % 2 / 2
+        colors = {}
+        for i = 1, 7 + 1, 1 do
+            z = Color3.fromHSV(loop - ((i - 1)/7), 1, 1)
+            if loop - ((i - 1) / 7) < 0 then
+                z = Color3.fromHSV((loop - ((i - 1) / 7)) + 1, 1, 1)
+            end
+            local d = ColorSequenceKeypoint.new((i - 1) / 7, z)
+            table.insert(colors, #colors + 1, d)
+        end
+        uiGradient.Color = ColorSequence.new(colors)
     end
-    for _,v in pairs(main:GetChildren()) do
-       if v.Name == "LeftContainer" or v.Name == "RightContainer" and v.Visible then
-           v.Size = Opened and UDim2.new(0, 168,0, 287) or UDim2.new(0, 168,0, 0)
-       end
     end
     end)
-    
-    TweenService:Create(main, TweenInfo.new(.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {Size = Opened and UDim2.new(0, 450,0, 321) or UDim2.new(0, 450,0, 30)}):Play()
-end)
 
-local editButton = Instance.new("ImageButton")
-editButton.Name = "EditButton"
-editButton.Image = getcustomasset("Shaman/ColorDropper.png")
-editButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
-editButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-editButton.BackgroundTransparency = 1
-editButton.Position = UDim2.new(0.841, 0, 0.226, 0)
-editButton.Size = UDim2.new(0, 15, 0, 15)
-editButton.ZIndex = 2
-editButton.Parent = topbar
+    editButton.MouseEnter:Connect(function()
+        if not EditOpened then
+            uiGradient.Enabled = true
+        end
+    end)
 
-local uiGradient = Instance.new("UIGradient")
-uiGradient.Name = "UIGradient"
-uiGradient.Enabled = false
-uiGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0,Color3.fromRGB(255,0,0)),
-    ColorSequenceKeypoint.new(0.2,Color3.fromRGB(255,255,0)),
-    ColorSequenceKeypoint.new(0.4,Color3.fromRGB(0,255,0)),
-    ColorSequenceKeypoint.new(0.6,Color3.fromRGB(0,255,255)),
-    ColorSequenceKeypoint.new(0.8,Color3.fromRGB(0,0,255)),
-    ColorSequenceKeypoint.new(1,Color3.fromRGB(255,0,255)),
-}
-uiGradient.Parent = editButton
+    editButton.MouseLeave:Connect(function()
+        if not EditOpened then
+            uiGradient.Enabled = false
+        end
+    end)
 
-task.spawn(function()
-    while wait() do -- skidded from devforum
-    if uiGradient.Enabled then
-	local loop = tick() % 2 / 2
-	colors = {}
-	for i = 1, 7 + 1, 1 do
-		z = Color3.fromHSV(loop - ((i - 1)/7), 1, 1)
-		if loop - ((i - 1) / 7) < 0 then
-			z = Color3.fromHSV((loop - ((i - 1) / 7)) + 1, 1, 1)
-		end
-		local d = ColorSequenceKeypoint.new((i - 1) / 7, z)
-		table.insert(colors, #colors + 1, d)
-	end
-	uiGradient.Color = ColorSequence.new(colors)
-end
-end
-end)
-
-editButton.MouseEnter:Connect(function()
-    if not EditOpened then
-        uiGradient.Enabled = true
-    end
-end)
-
-editButton.MouseLeave:Connect(function()
-    if not EditOpened then
-        uiGradient.Enabled = false
-    end
-end)
-
-editButton.MouseButton1Click:Connect(function()
-    EditOpened = not EditOpened
-    
-    uiGradient.Enabled = EditOpened and true or false
-    
-    if not EditOpened then
-        for frame, v in pairs(ColorElements) do
-            if v.Enabled then
-                if frame.ClassName == "Frame" then
-                TweenService:Create(frame, TweenInfo.new(.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(48, 207, 106)}):Play()
-                else
-                TweenService:Create(frame, TweenInfo.new(.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(48, 207, 106)}):Play()
+    editButton.MouseButton1Click:Connect(function()
+        EditOpened = not EditOpened
+        
+        uiGradient.Enabled = EditOpened and true or false
+        
+        if not EditOpened then
+            for frame, v in pairs(ColorElements) do
+                if v.Enabled then
+                    if frame.ClassName == "Frame" then
+                    TweenService:Create(frame, TweenInfo.new(.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(48, 207, 106)}):Play()
+                    else
+                    TweenService:Create(frame, TweenInfo.new(.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {ImageColor3 = Color3.fromRGB(48, 207, 106)}):Play()
+                    end
+                end
+            end
+        else
+            for _,v in pairs(ColorElements) do
+                if v.Type ~= "Toggle" then
+                    v.Enabled = true
                 end
             end
         end
-    else
-        for _,v in pairs(ColorElements) do
-            if v.Type ~= "Toggle" then
-                v.Enabled = true
-            end
-        end
-    end
-end)
+    end)
+end
 
 local tabContainer = Instance.new("Frame")
 tabContainer.Name = "TabContainer"
@@ -1001,7 +1007,7 @@ end
 
 function sectiontable:Input(Info)
 Info.Placeholder = Info.Placeholder or "Input"
-Info.ClearOnFocus = Info.ClearOnFocus or nil
+Info.ClearText = Info.ClearText or true
 Info.Flag = Info.Flag or nil
 Info.Callback = Info.Callback or function() end
 Info.Tooltip = Info.Tooltip or ""
@@ -1051,7 +1057,7 @@ inputTextBox.Font = Enum.Font.GothamBold
 inputTextBox.PlaceholderColor3 = Color3.fromRGB(217, 217, 217)
 inputTextBox.PlaceholderText = Info.Placeholder
 inputTextBox.Text = ""
-inputTextBox.ClearTextOnFocus = Info.ClearOnFocus
+inputTextBox.ClearTextOnFocus = Info.ClearText
 inputTextBox.TextColor3 = Color3.fromRGB(237, 237, 237)
 inputTextBox.TextSize = 11
 inputTextBox.TextXAlignment = Enum.TextXAlignment.Left
