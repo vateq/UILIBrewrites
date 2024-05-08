@@ -1007,7 +1007,6 @@ end
 
 function sectiontable:Input(Info)
     Info.Placeholder = Info.Placeholder or "Input"
-    Info.ClearText = Info.ClearText or true
     Info.Flag = Info.Flag or nil
     Info.Callback = Info.Callback or function() end
     Info.Tooltip = Info.Tooltip or ""
@@ -1064,11 +1063,9 @@ function sectiontable:Input(Info)
     inputTextBox.BackgroundTransparency = 1
     inputTextBox.Position = UDim2.new(0.0253, 0, 0, 0)
     inputTextBox.Size = UDim2.new(0, 150, 0, 21)
-    inputTextBox.ClearTextOnFocus = Info.ClearText
     inputTextBox.Parent = inputOuter
 
     inputTextBox.FocusLost:Connect(function()
-        inputTextBox.ClearTextOnFocus = Info.ClearText
         task.spawn(function()
             pcall(Info.Callback, inputTextBox.Text)
             if Info.Flag ~= nil then
