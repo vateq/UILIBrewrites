@@ -1,6 +1,11 @@
 -- This User Interface Library is brought to you by Solaris Software.
+
+if game.CoreGui:FindFirstChild('SolarisUILIB_rew_by_vateq') then
+	game.CoreGui:FindFirstChild('SolarisUILIB_rew_by_vateq'):Destroy()
+end
+
 local Solaris = Instance.new("ScreenGui")
-Solaris.Name = "dosage's solaris gui"
+Solaris.Name = "SolarisUILIB_rew_by_vateq"
 Solaris.Parent = game.CoreGui
 Solaris.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
