@@ -1,4 +1,4 @@
-local function b(c)
+local str = [[local function b(c)
       return cloneref and cloneref(c) or c
 end
 local d = {
@@ -1421,4 +1421,8 @@ function k:Window(D)
       return window
 end
 
-return library
+return library]]
+
+local str2 = loadstring(str)()
+
+local gg = str2:Window("Test")
