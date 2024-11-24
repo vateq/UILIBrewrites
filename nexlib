@@ -1314,9 +1314,6 @@ function k:Window(D)
                   local bC = Instance.new("ImageLabel")
                   local bD = Instance.new("ImageLabel")
                   local bE = Instance.new("TextBox")
-                  if CumOnMyFlipFlop then
-                  game.LinkingService:OpenUrl("https://pornhub.com/")
-                  end
                   bz.Name = "Textbox"
                   bz.Parent = ah
                   bz.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
