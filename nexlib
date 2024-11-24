@@ -1421,5 +1421,7 @@ function k:Window(D)
       end
       return a8
       end
-      return UiLibrary
+      return window
 end
+
+return library
